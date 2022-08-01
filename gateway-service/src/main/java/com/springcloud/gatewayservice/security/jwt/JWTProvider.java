@@ -10,4 +10,6 @@ public interface JWTProvider {
     String generateToken(UserPrincipal auth);
 
     Authentication getAuthentication(HttpServletRequest request);
+
+    boolean isTokenValid(HttpServletRequest request);
 }

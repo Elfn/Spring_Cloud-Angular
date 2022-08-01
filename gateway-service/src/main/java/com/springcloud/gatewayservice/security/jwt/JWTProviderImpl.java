@@ -79,6 +79,16 @@ public class JWTProviderImpl implements JWTProvider {
 
     }
 
+    @Override
+    public boolean isTokenValid(HttpServletRequest request){
+        Claims claims = extractClaims(request);
+        if(claims == null){
+            return false;
+        }
+
+        return claims.getExpiration().before(new Date()) ? false : true;
+    }
+
     private Claims extractClaims(HttpServletRequest request){
         String token = SecurityUtils.extractAuthTokenFromRequest(request);
 
