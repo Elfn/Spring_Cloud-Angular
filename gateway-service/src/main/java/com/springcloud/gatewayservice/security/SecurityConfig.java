@@ -1,13 +1,11 @@
 package com.springcloud.gatewayservice.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.springcloud.gatewayservice.security.jwt.JWTAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
-import org.springframework.security.config.annotation.SecurityBuilder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -48,6 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    //Why don't we describe it as a component? Because of scope.
+    @Bean
+    public JWTAuthenticationFilter jwtAuthorizationFilter(){
+        return new JWTAuthenticationFilter();
     }
 
     public WebMvcConfigurer corsConfigurer(){
