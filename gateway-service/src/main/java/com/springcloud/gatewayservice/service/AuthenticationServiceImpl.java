@@ -17,6 +17,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private JWTProvider jwtProvider;
 
+    @Override
     public User signInAndReturnJWT(User signInRequest){
 
         // Creating authentication object using User credentials
